@@ -1,5 +1,4 @@
 # antiSMI_v3_0
-fundamental upgrade
 
 Well-balanced personal [news aggregator](https://t.me/antiSMI_bot) gets smart
 
