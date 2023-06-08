@@ -5,6 +5,8 @@ from loguru import logger
 import pickle
 import datetime as dt
 
+# from pydantic import BaseModel, HttpUrl
+
 load_dotenv()
 
 db_name = os.getenv("DB_NAME")
@@ -146,3 +148,9 @@ class Query(DataBaseMixin):
 				el['url'].split('/')[-1] for el in all_articles if el['agency'] == agency['telegram'])
 			all_agencies_articles[agency['telegram']] = articles_tuple
 		return all_agencies_articles
+
+	@staticmethod
+	def get_all_ids(engine, base_to) -> list:
+		query = f"SELECT agency, split_part(url, '/', 5)::int AS id FROM {base_to}"
+		query_result = DataBaseMixin.get(query, engine)
+		return query_result
