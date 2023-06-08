@@ -33,7 +33,7 @@ if __name__ == '__main__':
 	try:
 		# main()
 		scheduler = BlockingScheduler()
-		scheduler.add_job(main, 'interval', hours=1, next_run_time=dt.datetime(2023, 6, 8, 18, 55, 0))
+		scheduler.add_job(main, 'interval', hours=1, next_run_time=dt.datetime(2023, 6, 8, 19, 55, 0))
 		scheduler.start()
 	except Exception as e:
 		logger.exception('Незадокументированное исключение')
