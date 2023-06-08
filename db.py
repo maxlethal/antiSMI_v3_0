@@ -69,7 +69,7 @@ class DataBaseMixin:
 		except Exception:
 			filename = table_name + '-' + str(dt.datetime.now()).split()[0] + '-' + \
 			           str(dt.datetime.now()).split()[-1].split('.')[-1]
-			with open(f'{filename}.pkl', 'wb') as f:
+			with open(f'pkl/{filename}.pkl', 'wb') as f:
 				pickle.dump(data, f)
 			logger.error(
 				f'Отказ записи в {table_name}. Ваши данные сохранены в файл {filename}.pkl. Запишите их вручную')

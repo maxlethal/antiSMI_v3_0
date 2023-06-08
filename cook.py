@@ -136,37 +136,32 @@ def check_and_move_to_asmi():
 	DataBaseMixin.move('final', 'news', final_news)
 
 
-if __name__ == '__main__':
-	"""Организация и запуск планировщика для выполения двух типов задач: обработки новостей и записи их в AntiSMI"""
-
+def main():
 	cook_and_move_to_smi()
 	time.sleep(3)
 	check_and_move_to_asmi()
+
+
+if __name__ == '__main__':
+	"""Организация и запуск планировщика для выполения двух типов задач: обработки новостей и записи их в AntiSMI"""
 	# scheduler = BlockingScheduler()
-
-	# scheduler.add_job(cook_and_move_to_smi, 'interval', hours=1, next_run_time=dt.datetime(2023, 5, 27, 1, 5, 0))
-
-	# scheduler.add_job(cook_and_move_to_smi, 'cron', max_instances=10, misfire_grace_time=600, hour=7,
+	#
+	# scheduler.add_job(main, 'cron', max_instances=10, misfire_grace_time=600, hour=5,
 	#                   minute=00)
-	# scheduler.add_job(cook_and_move_to_smi, 'cron', max_instances=10, misfire_grace_time=600, hour=10,
+	# scheduler.add_job(main, 'cron', max_instances=10, misfire_grace_time=600, hour=7,
 	#                   minute=00)
-	# scheduler.add_job(cook_and_move_to_smi, 'cron', max_instances=10, misfire_grace_time=600, hour=12,
+	# scheduler.add_job(main, 'cron', max_instances=10, misfire_grace_time=600, hour=9,
+	#                   minute=16)
+	# scheduler.add_job(main, 'cron', max_instances=10, misfire_grace_time=600, hour=12,
 	#                   minute=00)
-	# scheduler.add_job(cook_and_move_to_smi, 'cron', max_instances=10, misfire_grace_time=600, hour=15,
+	# scheduler.add_job(main, 'cron', max_instances=10, misfire_grace_time=600, hour=15,
 	#                   minute=00)
-	# scheduler.add_job(cook_and_move_to_smi, 'cron', max_instances=10, misfire_grace_time=600, hour=17,
+	# scheduler.add_job(main, 'cron', max_instances=10, misfire_grace_time=600, hour=17,
 	#                   minute=00)
-	# scheduler.add_job(cook_and_move_to_smi, 'cron', max_instances=10, misfire_grace_time=600, hour=19,
-	#                   minute=55)
-	# scheduler.add_job(cook_and_move_to_smi, 'cron', max_instances=10, misfire_grace_time=600, hour=21,
-	#                   minute=7)
-	# scheduler.add_job(check_and_move_to_asmi, 'cron', max_instances=10, misfire_grace_time=600, hour=7,
-	#                   minute=55)
-	# scheduler.add_job(check_and_move_to_asmi, 'cron', max_instances=10, misfire_grace_time=600, hour=11,
-	#                   minute=55)
-	# scheduler.add_job(check_and_move_to_asmi, 'cron', max_instances=10, misfire_grace_time=600, hour=17,
-	#                   minute=55)
-	# scheduler.add_job(check_and_move_to_asmi, 'cron', max_instances=10, misfire_grace_time=600, hour=21,
-	#                   minute=55)
-
+	# scheduler.add_job(main, 'cron', max_instances=10, misfire_grace_time=600, hour=20,
+	#                   minute=00)
+	# scheduler.add_job(main, 'cron', max_instances=10, misfire_grace_time=600, hour=21,
+	#                   minute=00)
+	#
 	# scheduler.start()
+	main()
