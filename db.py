@@ -4,7 +4,6 @@ from sqlalchemy import create_engine, text, insert, update, MetaData, Table, Col
 from loguru import logger
 import pickle
 import datetime as dt
-
 # from pydantic import BaseModel, HttpUrl
 
 load_dotenv()
@@ -15,9 +14,9 @@ db_pass = os.getenv("DB_PASS")
 db_host = os.getenv("DB_HOST")
 
 asmi = create_engine(
-	f'postgresql+psycopg2://{db_name}:{db_pass}@{db_host}/{db_name}')
+	f'postgresql+psycopg2://{db_name}:{db_pass}@{db_host}/{db_name}', pool_pre_ping=True)
 smi = create_engine(
-	f'postgresql+psycopg2://{db_test}:{db_pass}@{db_host}/{db_test}')
+	f'postgresql+psycopg2://{db_test}:{db_pass}@{db_host}/{db_test}', pool_pre_ping=True)
 
 
 class DataBaseMixin:

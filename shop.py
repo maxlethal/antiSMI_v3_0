@@ -1,21 +1,19 @@
 from db import *
-from dicts import black_labels
+from imports_shop import *
 
-import random
-from loguru import logger
-from dateutil import parser
-import requests
-from bs4 import BeautifulSoup
+logger.add('debugging//debug_shop.json', format="{time} {message}", level='INFO', rotation="1 week", compression="zip",
+           serialize=True)
 
 
 class AgenciesID(DataBaseMixin):
+	"""Собирает словарь всех существующих id новостей для каждого агентства и работает с ним"""
+
 	def __init__(self):
 		self.ids_dict = dict()
 
 	@staticmethod
 	def __get_agencies_ids() -> dict:
-		"""Отдаёт словарь всех существующих id новостей для каждого агенства"""
-		"""{'agency': (id1, id2,...)}"""
+		"""Отдаёт словарь id-новостей каждого агентства в виде {'agency': (id1, id2,...)}"""
 		all_agencies_ids = {}
 		news_ids = Query.get_all_ids(smi, 'news')
 		final_ids = Query.get_all_ids(smi, 'final')
@@ -49,7 +47,7 @@ class AgenciesID(DataBaseMixin):
 
 
 class Parser(Query):
-	"""Класс парсера: собирает новости агентства, сохраняет словарь новостей и позволяет работать с ним """
+	"""Класс сбора новостей: парсит новости агентства, сохраняет словарь новостей и позволяет работать с ним """
 
 	def __init__(self, channel: str, ids: tuple):
 		self.channel = channel
@@ -113,3 +111,26 @@ class Parser(Query):
 		for label in total_label:
 			news = news.replace(label, ' ')
 		return news.strip()
+
+
+def go_shopping():
+	total_news = 0
+	start_time = dt.datetime.now()
+
+	agencies_ids = AgenciesID()
+	agencies_ids.set_ids
+	for channel, ids_tuple in agencies_ids.get_ids.items():
+		channel = Parser(channel, ids_tuple)
+		channel.set_news
+		if len(channel):
+			DataBaseMixin.record(smi, 'news', channel.get_news)
+			logger.info(f'{channel.channel}: собрано {len(channel)} новостей')
+		total_news += len(channel)
+		channel.del_news
+		time.sleep(random.randint(1, 3))
+	agencies_ids.del_ids
+
+	result_time = dt.datetime.now() - start_time
+	logger.info(
+		f'Сбор завершен успешно.Получено {total_news} новостей за {round(result_time.seconds / 60, 2)} минут '
+		f'со скоростью {round(result_time.seconds / total_news, 2)}  новостей в секунду\n')
