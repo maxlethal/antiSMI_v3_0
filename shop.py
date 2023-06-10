@@ -1,5 +1,4 @@
 from db import *
-from imports_shop import *
 
 logger.add('debugging//debug_shop.json', format="{time} {message}", level='INFO', rotation="1 week", compression="zip",
            serialize=True)

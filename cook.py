@@ -1,4 +1,4 @@
-from imports_cook import *
+from db import *
 
 logger.add('debugging//debug_cook.json', format="{time} {message}", level='INFO', rotation="1 week", compression="zip",
            serialize=True)

@@ -1,25 +1,8 @@
-from dotenv import load_dotenv
-import os
-from sqlalchemy import create_engine, text, insert, update, MetaData, Table, Column, Text, TIMESTAMP
-from loguru import logger
-import pickle
-import datetime as dt
-# from pydantic import BaseModel, HttpUrl
-
-load_dotenv()
-
-db_name = os.getenv("DB_NAME")
-db_test = os.getenv("DB_TEST")
-db_pass = os.getenv("DB_PASS")
-db_host = os.getenv("DB_HOST")
-
-asmi = create_engine(
-	f'postgresql+psycopg2://{db_name}:{db_pass}@{db_host}/{db_name}', pool_pre_ping=True)
-smi = create_engine(
-	f'postgresql+psycopg2://{db_test}:{db_pass}@{db_host}/{db_test}', pool_pre_ping=True)
+from imports import *
 
 
 class DataBaseMixin:
+	"""Набор универсальных функций для работы с базами данных"""
 
 	@staticmethod
 	def get_table(engine, table_name):
