@@ -115,6 +115,7 @@ def check_and_move_to_asmi():
 				logger.info(f"{news_id} из {news['agency']} уже имеется в AntiSMI, новость не будет записана")
 	try:
 		DataBaseMixin.move('final', 'news', final_news)
-		os.remove("".join(glob.glob("pkl/*")))
+		if glob.glob("pkl/*"):
+			os.remove("".join(glob.glob("pkl/*")))
 	except Exception as e:
 		logger.exception(f'Не смог обработать из-за ошибки {e}')

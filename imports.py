@@ -9,7 +9,6 @@ import glob
 
 
 """Импорты bd.py - для работы с базами данных"""
-
 from dotenv import load_dotenv
 from sqlalchemy import create_engine, text, insert, update, MetaData, Table, Column, Text, TIMESTAMP
 # from pydantic import BaseModel, HttpUrl
@@ -28,15 +27,12 @@ smi = create_engine(
 
 
 """Импорты shop.py - для работы со сбором новостей"""
-
-
 from dateutil import parser
 import requests
 from bs4 import BeautifulSoup
 
 
 """Импорты cook.py - для работы обработкой новостей"""
-
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, T5ForConditionalGeneration
 import fasttext as fasttext
 import warnings
