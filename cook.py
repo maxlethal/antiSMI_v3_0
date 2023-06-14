@@ -87,7 +87,7 @@ def make_full_fresh_news_list() -> list:
     result_time = dt.datetime.now() - start_t
     logger.info(f'Обработка {len(fresh_news_list)} новостей завершена за {round(result_time.seconds / 60, 2)} минут')
     logger.info(
-        f'Среднее время обработки одной новости: {round(result_time.seconds / (len(fresh_news_list) + 0.01), 2)} сек\n')
+        f'Среднее время обработки одной новости: {round(result_time.seconds / (len(fresh_news_list) + 0.01), 2)} сек')
 
     return fresh_news_list
 

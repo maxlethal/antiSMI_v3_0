@@ -50,20 +50,23 @@ class AsmiModel(BaseModel):
     dicts_list: list[AsmiFields]
 
 
-def validate_and_write_to_news_db(news_list: list[ShortNewsFields]):
+def validate_and_write_to_news_db(news_list: list[ShortNewsFields]) -> int:
     try:
         validator_model = ShortModel(dicts_list=news_list)
         DataBaseMixin.record(smi, 'news', news_list)
         len_news = len(news_list)
     except ValueError:
         record_list = []
+        error_list = []
         for news in news_list:
             try:
                 validator_fields = ShortNewsFields(**news)
                 record_list.append(news)
             except ValueError:
                 logger.error(news)
+                error_list.append(news)
         DataBaseMixin.record(smi, 'news', record_list)
+        DataBaseMixin.record(smi, 'error_table', error_list)
         len_news = len(record_list)
     return len_news
 

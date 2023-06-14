@@ -19,8 +19,9 @@ class AgenciesID(DataBaseMixin):
         all_agencies_ids = {}
         news_ids = Query.get_all_ids(smi, 'news')
         final_ids = Query.get_all_ids(smi, 'final')
+        error_ids = Query.get_all_ids(smi, 'error_table')
         asmi_ids = Query.get_all_ids(asmi, 'news')
-        total_ids = [*news_ids, *final_ids, *asmi_ids]
+        total_ids = [*news_ids, *final_ids, *error_ids, *asmi_ids]
         all_active_agencies_query = "SELECT telegram FROM agencies WHERE is_parsing is True"
         all_active_agencies = DataBaseMixin.get(all_active_agencies_query, asmi)
 
@@ -119,6 +120,7 @@ def go_shopping():
     """Основная функция сбора: собираем новости, валидируем поля на соответствие, пишем во временную базу news"""
     total_news = 0
     start_time = dt.datetime.now()
+    logger.info(f'Начинается сбор новостей от {start_time}:')
 
     agencies_ids = AgenciesID()
     agencies_ids.set_ids
