@@ -130,12 +130,15 @@ def go_shopping():
         if len(channel):
             len_news = validate_and_write_to_news_db(channel.get_news)
             logger.info(f'{channel.channel}: собрано {len_news} новостей')
-        total_news += len_news
+        total_news += len(channel)
         channel.del_news
         time.sleep(random.randint(1, 3))
     agencies_ids.del_ids
 
     result_time = dt.datetime.now() - start_time
-    logger.info(
-        f'Сбор завершен успешно.Получено {total_news} новостей за {round(result_time.seconds / 60, 2)} минут '
-        f'со скоростью {round(result_time.seconds / total_news, 2)}  новостей в секунду\n')
+    try:
+        logger.info(
+            f'Сбор завершен успешно.Получено {total_news} новостей за {round(result_time.seconds / 60, 2)} минут '
+            f'со скоростью {round(result_time.seconds / total_news, 2)}  новостей в секунду\n')
+    except ZeroDivisionError:
+        logger.info('В этот раз ничего не собрано')

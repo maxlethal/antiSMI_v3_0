@@ -20,15 +20,16 @@ def serving():
 
 if __name__ == '__main__':
     try:
+        # shopping()
+        # cooking()
+        # serving()
         scheduler = BlockingScheduler()
-        scheduler.add_job(shopping, 'cron', hour='*', minute=55, id='shopper', max_instances=10, misfire_grace_time=600)
+        scheduler.add_job(shopping, 'cron', hour='6-23', minute=55, id='shopper', max_instances=10, misfire_grace_time=600)
         scheduler.add_job(cooking, 'cron', hour='7-23/2', id='cooker', max_instances=10, misfire_grace_time=600)
         scheduler.add_job(serving, 'cron', hour='9-21/4', minute=50, id='server', max_instances=10,
                           misfire_grace_time=600)
         scheduler.start()
-        # shopping()
-        # cooking()
-        # serving()
+
 
     except Exception as e:
         logger.exception(e)
